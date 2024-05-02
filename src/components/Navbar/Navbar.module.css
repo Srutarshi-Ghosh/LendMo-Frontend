@@ -1,0 +1,155 @@
+/* 
+/* Navbar.module.css */
+/*
+.navbar {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 10px 0;
+}
+
+
+
+.mobile-menu-icon {
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.navLogo img {
+  max-height: 50px; /* Adjust the max-height as needed 
+}
+
+
+
+.nav-menu {
+  display: flex;
+  margin-right: 20px;
+}
+
+.nav-link {
+  margin-right: 15px;
+  text-decoration: none;
+  color: #333333;
+  font-weight: 500;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: #333333;
+  padding: 12px 16px;
+  display: block;
+  text-decoration: none;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.login-section .nav-link {
+  margin-right: 10px;
+  padding: 8px 15px;
+  background-color: #3498db;
+  color: #ffffff;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.signup-btn {
+  background-color: #2ecc71;
+}
+
+@media (max-width: 768px) {
+  .desktop-view {
+    display: none;
+  }
+
+  .mobile-view {
+    display: block;
+  }
+
+  .nav-menu {
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: #ffffff;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    display: none;
+  }
+
+  .nav-menu.show {
+    display: flex;
+  }
+
+  .nav-link {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: none;
+  }
+
+  .dropdown.show:hover .dropdown-content {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background-color: #ffffff;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+} 
+*/
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+	width: 100%;
+}
+
+.right-nav-section {
+  display: flex;
+  align-items: center;
+}
+
+.left-nav-section {
+  display: flex;
+  align-items: center;
+}
+
+.navbar {
+  background-color: #333;
+  padding: 10px 20px;
+}
+
+
+
+.nav-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.nav-link:hover {
+  color: #ff0; /* Change color on hover */
+}
