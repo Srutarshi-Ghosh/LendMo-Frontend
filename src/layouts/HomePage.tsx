@@ -1,9 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import landingImg from "../assets/landing-page-image.png";
-import Navbar from "../components/Navbar";
 
-const Homepage = () => {
+const HomePage = () => {
 	return (
 		<div className="container text-center">
 			<div className="row">
@@ -36,4 +35,4 @@ const Homepage = () => {
 	);
 };
 
-export default Homepage;
+export default HomePage;
