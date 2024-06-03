@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Navbar.module.css";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
+
 
 const Navbar = () => {
-	const loggedInNav = () => {};
+
+	const loggedIn = useSelector((state: RootState) => state.auth.isAuthenticated)
+	const [showModal, setShowModal] = useState(true)
 
 	return (
 		<div className={styles.navbar}>
