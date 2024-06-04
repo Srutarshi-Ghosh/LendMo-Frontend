@@ -14,8 +14,8 @@ const Navbar = () => {
 	return (
 		<>
 			<div className={styles.navbar}>
-				<div className={styles["nav-container"]}>
-					<div className={styles["left-nav-section"]}>
+				<div className={styles.navContainer}>
+					<div className={styles.leftNavSection}>
 						<div className={styles.navLogo}>
 							<Link
 								to="/"
@@ -29,32 +29,32 @@ const Navbar = () => {
 							</Link>
 						</div>
 					</div>
-					<div className={styles["right-nav-section"]}>
+					<div className={styles.rightNavSection}>
 						<div className={styles.navbar}>
-							<ul className={styles["nav-list"]}>
-								<li className={styles["nav-item"]}>
-									<a
-										href="/signup"
-										className={styles["nav-link"]}
+							<ul className={styles.navList}>
+								<li className={styles.navItem}>
+									<Link
+										to="/signup"
+										className={styles.navLink}
 									>
 										Signup
-									</a>
+									</Link>
 								</li>
-								<li className={styles["nav-item"]}>
-									<a
-										href="/login"
-										className={styles["nav-link"]}
+								<li className={styles.navItem}>
+									<Link
+										to="/login"
+										className={styles.navLink}
 										onClick={() => setShowModal(true)}
 									>
 										Login
-									</a>
+									</Link>
 								</li>
 							</ul>
 						</div>
 					</div>
 				</div>
 			</div>
-			{showModal && LoginModal({ closeModal: closeModal })}
+			{showModal && <LoginModal closeModal={closeModal} />}
 		</>
 	);
 };
