@@ -6,10 +6,36 @@ import { RootState } from "../store";
 import LoginModal from "./LoginModal";
 
 const Navbar = () => {
-	const loggedIn = useSelector((state: RootState) => state.auth.isAuthenticated);
+	const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
 	const [showModal, setShowModal] = useState(false);
 
 	const closeModal = () => setShowModal(false);
+
+	const loggedOutNav = () => {
+		return (
+			<div className={styles.navbar}>
+				<ul className={styles.navList}>
+					<li className={styles.navItem}>
+						<Link
+							to="/signup"
+							className={styles.navLink}
+						>
+							Signup
+						</Link>
+					</li>
+					<li className={styles.navItem}>
+						<Link
+							to="/login"
+							className={styles.navLink}
+							onClick={() => setShowModal(true)}
+						>
+							Login
+						</Link>
+					</li>
+				</ul>
+			</div>
+		);
+	};
 
 	return (
 		<>
@@ -29,29 +55,7 @@ const Navbar = () => {
 							</Link>
 						</div>
 					</div>
-					<div className={styles.rightNavSection}>
-						<div className={styles.navbar}>
-							<ul className={styles.navList}>
-								<li className={styles.navItem}>
-									<Link
-										to="/signup"
-										className={styles.navLink}
-									>
-										Signup
-									</Link>
-								</li>
-								<li className={styles.navItem}>
-									<Link
-										to="/login"
-										className={styles.navLink}
-										onClick={() => setShowModal(true)}
-									>
-										Login
-									</Link>
-								</li>
-							</ul>
-						</div>
-					</div>
+					<div className={styles.rightNavSection}>{loggedOutNav()}</div>
 				</div>
 			</div>
 			{showModal && <LoginModal closeModal={closeModal} />}
