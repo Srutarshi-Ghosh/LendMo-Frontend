@@ -12,10 +12,10 @@ const Navbar = () => {
 				<ul className={styles.navList}>
 					<li className={styles.navItem}>
 						<Link
-							to='/signup'
+							to='/register'
 							className={styles.navLink}
 						>
-							Signup
+							Register
 						</Link>
 					</li>
 					<li className={styles.navItem}>

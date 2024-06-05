@@ -1,21 +1,21 @@
 import React from 'react';
 import styles from '../styles/LoginPage.module.css';
 import { Link } from 'react-router-dom';
-import LoginForm from '../components/LoginForm';
+import RegistrationForm from '../components/RegistrationForm';
 
-const LoginPage = () => {
+const RegistrationPage = () => {
 	return (
 		<div className={styles.container}>
 			<div className={styles.loginBox}>
 				<h2>Login</h2>
-				{LoginForm()}
+				{RegistrationForm()}
 				<div className={styles.registerLink}>
-					Don't have an account?
-					<Link to='/signup'>Register here</Link>
+					Already have an account?
+					<Link to='/login'>Login here</Link>
 				</div>
 			</div>
 		</div>
 	);
 };
 
-export default LoginPage;
+export default RegistrationPage;
