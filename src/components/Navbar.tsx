@@ -1,18 +1,16 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import styles from '../styles/Navbar.module.css';
-import { useSelector } from 'react-redux';
-import { RootState } from '../store';
-import LoginModal from './LoginModal';
+import React from "react";
+import { Link } from "react-router-dom";
+import styles from "../styles/Navbar.module.css";
 
 const Navbar = () => {
+	
 	const loggedOutNav = () => {
 		return (
 			<div className={styles.navbar}>
 				<ul className={styles.navList}>
 					<li className={styles.navItem}>
 						<Link
-							to='/register'
+							to="/register"
 							className={styles.navLink}
 						>
 							Register
@@ -20,7 +18,7 @@ const Navbar = () => {
 					</li>
 					<li className={styles.navItem}>
 						<Link
-							to='/login'
+							to="/login"
 							className={styles.navLink}
 						>
 							Login
@@ -38,13 +36,13 @@ const Navbar = () => {
 					<div className={styles.leftNavSection}>
 						<div className={styles.navLogo}>
 							<Link
-								to='/'
-								aria-label='HomePage'
+								to="/"
+								aria-label="HomePage"
 							>
 								<img
 									className={styles.imgFluid}
-									src='/_nuxt/Logo2.679479c7.svg'
-									alt='IndiaP2P Website Logo'
+									src="/_nuxt/Logo2.679479c7.svg"
+									alt="IndiaP2P Website Logo"
 								/>
 							</Link>
 						</div>
