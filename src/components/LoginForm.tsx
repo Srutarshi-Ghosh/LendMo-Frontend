@@ -1,21 +1,35 @@
-import React from 'react';
-import styles from '../styles/LoginForm.module.css'
+import React, { useState } from 'react';
+import styles from '../styles/LoginForm.module.css';
 
-const loginForm = () => {
+const LoginForm = () => {
+	const [loginFormData, setLoginFormData] = useState({
+		email: '',
+		password: '',
+	});
+
+	const handleChange = (event: React.FormEvent<HTMLInputElement>): void => {
+		const { name, value } = event.target as HTMLInputElement;
+		setLoginFormData({ ...loginFormData, [name]: value });
+	};
+
 	return (
 		<form>
 			<div className={styles.inputGroup}>
-				<label>Username</label>
+				<label>Email</label>
 				<input
 					type='text'
-					placeholder='Enter username'
+					name='email'
+					placeholder='Enter Email'
+					onChange={handleChange}
 				/>
 			</div>
 			<div className={styles.inputGroup}>
 				<label>Password</label>
 				<input
 					type='password'
-					placeholder='Enter password'
+					name='password'
+					placeholder='Enter Password'
+					onChange={handleChange}
 				/>
 			</div>
 			<button
@@ -28,4 +42,4 @@ const loginForm = () => {
 	);
 };
 
-export default loginForm;
+export default LoginForm;
