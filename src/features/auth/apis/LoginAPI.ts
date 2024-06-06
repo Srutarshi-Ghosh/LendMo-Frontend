@@ -9,6 +9,7 @@ const loginAPI = async (email: string, password: string) => {
 		},
 		body: JSON.stringify({ email, password }),
 	});
+	console.log(response)
 
 	if (!response.ok) {
 		const errorData = await response.json();
