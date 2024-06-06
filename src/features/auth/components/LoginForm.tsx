@@ -14,7 +14,7 @@ const LoginForm = () => {
 	};
 
 	return (
-		<form style={{display: 'flex', flexDirection: 'column'}}>
+		<form className={styles.form}>
 			<TextField
 				required
 				autoFocus

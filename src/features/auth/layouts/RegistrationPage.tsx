@@ -12,9 +12,13 @@ const RegistrationPage = () => {
 				flexDirection='column'
 				alignItems='center'
 				justifyContent='center'
-				sx={{mt: 4}}
+				sx={{ mt: 4, boxShadow:' 0 4px 8px rgba(0, 0, 0, 0.1)'}}
 			>
-				<Typography variant='h4' component='h1' gutterBottom>
+				<Typography
+					variant='h4'
+					component='h1'
+					gutterBottom
+				>
 					Register
 				</Typography>
 				{RegistrationForm()}

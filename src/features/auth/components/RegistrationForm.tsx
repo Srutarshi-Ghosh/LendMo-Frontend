@@ -18,7 +18,7 @@ const RegistrationForm = () => {
 	};
 
 	return (
-		<form style={{ display: 'flex', flexDirection: 'column' }}>
+		<form className={styles.form}>
 			<TextField
 				required
 				autoFocus
@@ -66,7 +66,7 @@ const RegistrationForm = () => {
 				name='password'
 				InputLabelProps={{ shrink: true }}
 				autoComplete='current-password'
-				value={registrationFormData.password}
+				value={password}
 				onChange={(event) => handleChange(event)}
 			/>
 			<TextField
@@ -76,10 +76,10 @@ const RegistrationForm = () => {
 				id='confirmPassword'
 				label='Confirm Password'
 				type='password'
-				name='password'
+				name='confirmPassword'
 				InputLabelProps={{ shrink: !!confirmPassword }}
 				autoComplete='current-password'
-				value={registrationFormData.confirmPassword}
+				value={confirmPassword}
 				onChange={(event) => handleChange(event)}
 			/>
 			<Button
