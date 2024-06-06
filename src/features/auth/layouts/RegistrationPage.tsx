@@ -2,19 +2,28 @@ import React from 'react';
 import styles from '../styles/RegistrationPage.module.css';
 import { Link } from 'react-router-dom';
 import RegistrationForm from '../components/RegistrationForm';
+import { Container, Box, Typography } from '@mui/material';
 
 const RegistrationPage = () => {
 	return (
-		<div className={styles.container}>
-			<div className={styles.loginBox}>
-				<h2>Register</h2>
+		<Container maxWidth='xs'>
+			<Box
+				display='flex'
+				flexDirection='column'
+				alignItems='center'
+				justifyContent='center'
+				sx={{mt: 4}}
+			>
+				<Typography variant='h4' component='h1' gutterBottom>
+					Register
+				</Typography>
 				{RegistrationForm()}
 				<div className={styles.registerLink}>
 					Already have an account?
 					<Link to='/login'>Login here</Link>
 				</div>
-			</div>
-		</div>
+			</Box>
+		</Container>
 	);
 };
 

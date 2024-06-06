@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from '../styles/LoginForm.module.css';
+import { Button, TextField } from '@mui/material';
 
 const LoginForm = () => {
 	const [loginFormData, setLoginFormData] = useState({
@@ -7,37 +8,48 @@ const LoginForm = () => {
 		password: '',
 	});
 
-	const handleChange = (event: React.FormEvent<HTMLInputElement>): void => {
+	const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
 		const { name, value } = event.target as HTMLInputElement;
 		setLoginFormData({ ...loginFormData, [name]: value });
 	};
 
 	return (
-		<form>
-			<div className={styles.inputGroup}>
-				<label>Email</label>
-				<input
-					type='text'
-					name='email'
-					placeholder='Enter Email'
-					onChange={handleChange}
-				/>
-			</div>
-			<div className={styles.inputGroup}>
-				<label>Password</label>
-				<input
-					type='password'
-					name='password'
-					placeholder='Enter Password'
-					onChange={handleChange}
-				/>
-			</div>
-			<button
+		<form style={{display: 'flex', flexDirection: 'column'}}>
+			<TextField
+				required
+				autoFocus
+				variant='outlined'
+				margin='normal'
+				id='email'
+				label='Email Address'
+				type='email'
+				name='email'
+				autoComplete='email'
+				value={loginFormData.email}
+				onChange={(event) => handleChange(event)}
+			/>
+			<TextField
+				required
+				variant='outlined'
+				margin='normal'
+				id='password'
+				label='Password'
+				type='password'
+				name='password'
+				InputLabelProps={{shrink: true}}
+				autoComplete='current-password'
+				value={loginFormData.password}
+				onChange={(event) => handleChange(event)}
+			/>
+			<Button
 				type='submit'
-				className={styles.submitButton}
+				variant='contained'
+				color='primary'
+				sx={{ mt: 3, mb: 2 }}
+
 			>
-				Submit
-			</button>
+				Login
+			</Button>
 		</form>
 	);
 };

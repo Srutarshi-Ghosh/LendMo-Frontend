@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from '../styles/RegistrationForm.module.css';
+import { TextField, Button } from '@mui/material';
 
 const RegistrationForm = () => {
 	const [registrationFormData, setRegistrationFormData] = useState({
@@ -9,65 +10,86 @@ const RegistrationForm = () => {
 		password: '',
 		confirmPassword: '',
 	});
+	const { firstName, lastName, email, password, confirmPassword } = registrationFormData;
 
-	const handleChange = (event: React.FormEvent<HTMLInputElement>): void => {
+	const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
 		const { name, value } = event.target as HTMLInputElement;
 		setRegistrationFormData({ ...registrationFormData, [name]: value });
 	};
 
 	return (
-		<form>
-			<div className={styles.inputGroup}>
-				<label>First Name</label>
-				<input
-					type='text'
-					name='firstName'
-					placeholder='Enter First Name'
-					onChange={handleChange}
-				/>
-			</div>
-			<div className={styles.inputGroup}>
-				<label>Last Name</label>
-				<input
-					type='text'
-					name='lastName'
-					placeholder='Enter Last Name'
-					onChange={handleChange}
-				/>
-			</div>
-			<div className={styles.inputGroup}>
-				<label>Email</label>
-				<input
-					type='text'
-					name='email'
-					placeholder='Enter Email'
-					onChange={handleChange}
-				/>
-			</div>
-			<div className={styles.inputGroup}>
-				<label>Password</label>
-				<input
-					type='password'
-					name='password'
-					placeholder='Enter Password'
-					onChange={handleChange}
-				/>
-			</div>
-			<div className={styles.inputGroup}>
-				<label>Confirm Password</label>
-				<input
-					type='password'
-					name='confirmPassword'
-					placeholder='Confirm Password'
-					onChange={handleChange}
-				/>
-			</div>
-			<button
+		<form style={{ display: 'flex', flexDirection: 'column' }}>
+			<TextField
+				required
+				autoFocus
+				variant='outlined'
+				margin='normal'
+				id='firstName'
+				label='First Name'
+				InputLabelProps={{ shrink: !!firstName }}
+				name='firstName'
+				value={firstName}
+				onChange={(event) => handleChange(event)}
+			/>
+			<TextField
+				required
+				variant='outlined'
+				margin='normal'
+				id='lastName'
+				label='Last Name'
+				InputLabelProps={{ shrink: !!lastName }}
+				name='lastName'
+				autoComplete='lastName'
+				value={lastName}
+				onChange={(event) => handleChange(event)}
+			/>
+			<TextField
+				required
+				variant='outlined'
+				margin='normal'
+				id='email'
+				label='Email Address'
+				InputLabelProps={{ shrink: true }}
+				type='email'
+				name='email'
+				autoComplete='email'
+				value={email}
+				onChange={(event) => handleChange(event)}
+			/>
+			<TextField
+				required
+				variant='outlined'
+				margin='normal'
+				id='password'
+				label='Password'
+				type='password'
+				name='password'
+				InputLabelProps={{ shrink: true }}
+				autoComplete='current-password'
+				value={registrationFormData.password}
+				onChange={(event) => handleChange(event)}
+			/>
+			<TextField
+				required
+				variant='outlined'
+				margin='normal'
+				id='confirmPassword'
+				label='Confirm Password'
+				type='password'
+				name='password'
+				InputLabelProps={{ shrink: !!confirmPassword }}
+				autoComplete='current-password'
+				value={registrationFormData.confirmPassword}
+				onChange={(event) => handleChange(event)}
+			/>
+			<Button
 				type='submit'
-				className={styles.submitButton}
+				variant='contained'
+				color='primary'
+				sx={{ mt: 3, mb: 2 }}
 			>
-				Submit
-			</button>
+				Register
+			</Button>
 		</form>
 	);
 };
