@@ -1,57 +1,54 @@
-import React, { useState } from 'react';
-import styles from '../styles/LoginForm.module.css';
+import * as React from 'react';
 import { Button, TextField } from '@mui/material';
 
-const LoginForm = () => {
-	const [loginFormData, setLoginFormData] = useState({
-		email: '',
-		password: '',
-	});
+interface LoginFormProps {
+  onSubmit: (data: { email: string; password: string }) => void;
+}
 
-	const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
-		const { name, value } = event.target as HTMLInputElement;
-		setLoginFormData({ ...loginFormData, [name]: value });
-	};
+const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
+  const [formData, setFormData] = React.useState({
+    email: '',
+    password: '',
+  });
 
-	return (
-		<form className={styles.form}>
-			<TextField
-				required
-				autoFocus
-				variant='outlined'
-				margin='normal'
-				id='email'
-				label='Email Address'
-				type='email'
-				name='email'
-				autoComplete='email'
-				value={loginFormData.email}
-				onChange={(event) => handleChange(event)}
-			/>
-			<TextField
-				required
-				variant='outlined'
-				margin='normal'
-				id='password'
-				label='Password'
-				type='password'
-				name='password'
-				InputLabelProps={{shrink: true}}
-				autoComplete='current-password'
-				value={loginFormData.password}
-				onChange={(event) => handleChange(event)}
-			/>
-			<Button
-				type='submit'
-				variant='contained'
-				color='primary'
-				sx={{ mt: 3, mb: 2 }}
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
+  };
 
-			>
-				Login
-			</Button>
-		</form>
-	);
+  const handleSubmit = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+    event.preventDefault();
+    // Perform form validation here (optional)
+    onSubmit(formData);
+  };
+
+  return (
+    <>
+      <TextField
+        autoFocus
+        margin='dense'
+        label='Email'
+        type='email'
+        fullWidth
+        name='email'
+        value={formData.email}
+        onChange={handleChange}
+        required
+      />
+      <TextField
+        margin='dense'
+        label='Password'
+        type='password'
+        fullWidth
+        name='password'
+        value={formData.password}
+        onChange={handleChange}
+        required
+      />
+      <Button type='submit' variant='contained' onClick={(event) => handleSubmit(event)}>
+        Login
+      </Button>
+    </>
+  );
 };
 
 export default LoginForm;

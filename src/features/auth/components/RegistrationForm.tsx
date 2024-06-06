@@ -1,96 +1,98 @@
-import React, { useState } from 'react';
-import styles from '../styles/RegistrationForm.module.css';
-import { TextField, Button } from '@mui/material';
+import * as React from 'react';
+import { Button, TextField } from '@mui/material';
 
-const RegistrationForm = () => {
-	const [registrationFormData, setRegistrationFormData] = useState({
+interface RegistrationFormProps {
+	onSubmit: (data: {
+		firstName: string;
+		lastName: string;
+		email: string;
+		password: string;
+		confirmPassword: string;
+	}) => void;
+}
+
+const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
+	const [formData, setFormData] = React.useState({
 		firstName: '',
 		lastName: '',
 		email: '',
 		password: '',
 		confirmPassword: '',
 	});
-	const { firstName, lastName, email, password, confirmPassword } = registrationFormData;
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
-		const { name, value } = event.target as HTMLInputElement;
-		setRegistrationFormData({ ...registrationFormData, [name]: value });
+		setFormData({ ...formData, [event.target.name]: event.target.value });
+	};
+
+	const handleSubmit = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+		event.preventDefault();
+		// Perform form validation here (optional)
+		onSubmit(formData);
 	};
 
 	return (
-		<form className={styles.form}>
+		<>
 			<TextField
-				required
 				autoFocus
-				variant='outlined'
-				margin='normal'
-				id='firstName'
+				margin='dense'
 				label='First Name'
-				InputLabelProps={{ shrink: !!firstName }}
+				type='text'
+				fullWidth
 				name='firstName'
-				value={firstName}
+				value={formData.firstName}
 				onChange={(event) => handleChange(event)}
+				required
 			/>
 			<TextField
-				required
-				variant='outlined'
-				margin='normal'
-				id='lastName'
+				margin='dense'
 				label='Last Name'
-				InputLabelProps={{ shrink: !!lastName }}
+				type='text'
+				fullWidth
 				name='lastName'
-				autoComplete='lastName'
-				value={lastName}
-				onChange={(event) => handleChange(event)}
+				value={formData.lastName}
+				onChange={handleChange}
+				required
 			/>
 			<TextField
-				required
-				variant='outlined'
-				margin='normal'
-				id='email'
-				label='Email Address'
-				InputLabelProps={{ shrink: true }}
+				margin='dense'
+				label='Email'
 				type='email'
+				fullWidth
 				name='email'
-				autoComplete='email'
-				value={email}
-				onChange={(event) => handleChange(event)}
+				value={formData.email}
+				onChange={handleChange}
+				required
 			/>
 			<TextField
-				required
-				variant='outlined'
-				margin='normal'
-				id='password'
+				margin='dense'
 				label='Password'
 				type='password'
+				fullWidth
 				name='password'
-				InputLabelProps={{ shrink: true }}
-				autoComplete='current-password'
-				value={password}
-				onChange={(event) => handleChange(event)}
+				value={formData.password}
+				onChange={handleChange}
+				required
 			/>
 			<TextField
-				required
-				variant='outlined'
-				margin='normal'
-				id='confirmPassword'
+				margin='dense'
 				label='Confirm Password'
 				type='password'
+				fullWidth
 				name='confirmPassword'
-				InputLabelProps={{ shrink: !!confirmPassword }}
-				autoComplete='current-password'
-				value={confirmPassword}
-				onChange={(event) => handleChange(event)}
+				value={formData.confirmPassword}
+				onChange={handleChange}
+				required
+				error={formData.confirmPassword !== formData.password}
+				helperText={formData.confirmPassword !== formData.password ? "Passwords don't match" : ''}
 			/>
 			<Button
 				type='submit'
 				variant='contained'
-				color='primary'
-				sx={{ mt: 3, mb: 2 }}
+				onClick={(event) => handleSubmit(event)}
 			>
 				Register
 			</Button>
-		</form>
+		</>
 	);
 };
 

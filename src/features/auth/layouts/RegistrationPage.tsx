@@ -21,7 +21,7 @@ const RegistrationPage = () => {
 				>
 					Register
 				</Typography>
-				{RegistrationForm()}
+				{/* {RegistrationForm()} */}
 				<div className={styles.registerLink}>
 					Already have an account?
 					<Link to='/login'>Login here</Link>

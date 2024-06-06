@@ -17,7 +17,7 @@ const LoginPage = () => {
 				<Typography variant='h4' component='h1' gutterBottom>
 					Login
 				</Typography>
-				{LoginForm()}
+				{/* {LoginForm()} */}
 				<div className={styles.registerLink}>
 					Don't have an account?
 					<Link to='/register'>Register here</Link>

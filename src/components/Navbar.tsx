@@ -1,34 +1,36 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from '../styles/Navbar.module.css';
-import RegistrationModal from '../features/auth/components/RegistrationModal';
+import AuthModal from '../features/auth/components/AuthModal'; // Import AuthModal
+import { Modal } from '@mui/material';
 
-const Navbar = () => {
-	const [isRegistrationModalOpen, setIsRegistrationModalOpen] = useState(false);
+interface AuthModalProps {
+	open: boolean;
+	onClose: () => void;
+	onSubmit: (data: any) => void; // Simplified data type for now
+}
 
-	const handleRegistrationModalOpen = () => setIsRegistrationModalOpen(true);
-	const handleRegistrationModalClose = () => setIsRegistrationModalOpen(false);
+const Navbar: React.FC = () => {
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+	const [authType, setAuthType] = useState<'login' | 'register'>('login'); // Default to login
 
-	const loggedOutNav = () => (
-		<div className={styles.navList}>
-			<li className={styles.navItem}>
-				<button
-					className={styles.navLink}
-					onClick={handleRegistrationModalOpen}
-				>
-					Register
-				</button>
-			</li>
-			<li className={styles.navItem}>
-				<Link
-					to='/login'
-					className={styles.navLink}
-				>
-					Login
-				</Link>
-			</li>
-		</div>
-	);
+	const handleLoginModalOpen = () => {
+		setIsModalOpen(true);
+		setAuthType('login');
+	};
+
+	const handleRegistrationModalOpen = () => {
+		setIsModalOpen(true);
+		setAuthType('register');
+	};
+
+	const handleModalClose = () => setIsModalOpen(false);
+
+	const handleAuthSubmit = (data: any) => {
+		// Implement logic to handle login/registration data (optional)
+		console.log('Auth data submitted:', data);
+		setIsModalOpen(false);
+	};
 
 	return (
 		<>
@@ -40,22 +42,41 @@ const Navbar = () => {
 								to='/'
 								aria-label='HomePage'
 							>
-								<img
-									className={styles.imgFluid}
-									src='/_nuxt/Logo2.679479c7.svg'
-									alt='IndiaP2P Website Logo'
-								/>
+								{/* Your logo here */}
 							</Link>
 						</div>
 					</div>
-					<div className={styles.rightNavSection}>{loggedOutNav()}</div>
+					<div className={styles.rightNavSection}>
+						<li className={styles.navItem}>
+							<button
+								className={styles.navLink}
+								onClick={handleLoginModalOpen}
+							>
+								Login
+							</button>
+						</li>
+						<li className={styles.navItem}>
+							<button
+								className={styles.navLink}
+								onClick={handleRegistrationModalOpen}
+							>
+								Register
+							</button>
+						</li>
+					</div>
 				</div>
 			</div>
-			<RegistrationModal
-				open={isRegistrationModalOpen}
-				onClose={handleRegistrationModalClose}
-				onSubmit={(data) => {}}
-			/>
+			<Modal
+				open={isModalOpen}
+				onClose={handleModalClose}
+			>
+				<AuthModal
+					open={isModalOpen}
+					onClose={handleModalClose}
+					onSubmit={handleAuthSubmit}
+					authType={authType} // Pass authType to AuthModal
+				/>
+			</Modal>
 		</>
 	);
 };
