@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Button, TextField } from "@mui/material";
 import validateRegistrationForm from "../utils/ValidateRegistrationForm";
-import { RegistrationFormType } from "../constants/Types";
+import { RegistrationFormType } from "../constants/FormConstants";
 
 interface RegistrationModalProps {
 	closeModal: Function;
@@ -79,18 +79,6 @@ const RegistrationForm = (registrationModalProps: RegistrationModalProps) => {
 			/>
 			<TextField
 				margin="dense"
-				label="Email"
-				type="email"
-				fullWidth
-				name="email"
-				value={formData.email}
-				onChange={handleChange}
-				required
-				error={!!formErrors.email}
-				helperText={formErrors.email}
-			/>
-			<TextField
-				margin="dense"
 				label="Phone Number"
 				type="tel"
 				fullWidth
@@ -100,6 +88,18 @@ const RegistrationForm = (registrationModalProps: RegistrationModalProps) => {
 				required
 				error={!!formErrors.phoneNumber}
 				helperText={formErrors.phoneNumber}
+			/>
+			<TextField
+				margin="dense"
+				label="Email"
+				type="email"
+				fullWidth
+				name="email"
+				value={formData.email}
+				onChange={handleChange}
+				required
+				error={!!formErrors.email}
+				helperText={formErrors.email}
 			/>
 			<TextField
 				margin="dense"

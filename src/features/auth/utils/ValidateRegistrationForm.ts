@@ -1,4 +1,4 @@
-import { RegistrationFormType } from "../constants/Types";
+import { RegistrationFormType } from "../constants/FormConstants";
 
 const validateRegistrationForm = (formData: RegistrationFormType): RegistrationFormType => {
 	const newErrors: any = {};

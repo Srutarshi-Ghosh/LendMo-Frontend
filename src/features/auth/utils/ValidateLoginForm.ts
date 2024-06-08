@@ -1,4 +1,4 @@
-import { LoginFormType } from "../constants/Types";
+import { LoginFormType } from "../constants/FormConstants";
 
 const validateLoginForm = (formData: LoginFormType): LoginFormType => {
 	let newErrors = { email: "", password: "" };

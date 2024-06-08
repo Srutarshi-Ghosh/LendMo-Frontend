@@ -12,4 +12,4 @@ type LoginFormType = {
 	password: string;
 };
 
-export type { RegistrationFormType, LoginFormType };
+export type { LoginFormType, RegistrationFormType };

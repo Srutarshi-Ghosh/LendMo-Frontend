@@ -1,23 +1,21 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import AuthModal from "../features/auth/components/AuthModal";
-import { AppBar, Box, Button, IconButton, Modal, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, Button, IconButton, Toolbar, Typography } from "@mui/material";
+import { AuthType } from "../features/auth/constants/AuthConstants";
 
 const Navbar = () => {
-	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-	const [authType, setAuthType] = useState<string>("");
+	const [authType, setAuthType] = useState<AuthType>(AuthType.None);
 
 	const handleLoginModalOpen = () => {
-		setIsModalOpen(true);
-		setAuthType("login");
+		setAuthType(AuthType.Login);
 	};
 
 	const handleRegistrationModalOpen = () => {
-		setIsModalOpen(true);
-		setAuthType("register");
+		setAuthType(AuthType.Registration);
 	};
 
-	const closeModal = () => setIsModalOpen(false);
+	const closeModal = () => setAuthType(AuthType.None);
 
 	return (
 		<>
@@ -53,16 +51,11 @@ const Navbar = () => {
 					</Box>
 				</Toolbar>
 			</AppBar>
-			<Modal
-				open={isModalOpen}
-				onClose={closeModal}
-			>
-				<AuthModal
-					open={isModalOpen}
-					closeModal={closeModal}
-					authType={authType}
-				/>
-			</Modal>
+
+			<AuthModal
+				closeModal={closeModal}
+				authType={authType}
+			/>
 		</>
 	);
 };

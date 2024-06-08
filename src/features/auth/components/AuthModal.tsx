@@ -1,35 +1,61 @@
 import * as React from "react";
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Modal } from "@mui/material";
 import LoginForm from "./LoginForm";
 import RegistrationForm from "./RegistrationForm";
+import { AuthType } from "../constants/AuthConstants";
 interface AuthModalProps {
-	open: boolean;
 	closeModal: Function;
-	authType?: string;
+	authType: AuthType;
 }
 
 const AuthModal = (authModalProps: AuthModalProps) => {
-	const { open, closeModal, authType } = authModalProps;
-	const isLoginForm = authType === "login";
+	const { closeModal, authType } = authModalProps;
+
+	const openModal = authType !== AuthType.None;
+
+	const loginDialogue = "Please enter your email and password to login.";
+	const registrationDialogue = "Please fill in your details to create an account.";
+
+	let modalDialogue = "";
+	let modalTitle = "";
+	let modalFormElement = null;
+
+	const getAuthModalValues = () => {
+		switch (authType) {
+			case AuthType.Login:
+				modalDialogue = loginDialogue;
+				modalTitle = "Login";
+				modalFormElement = <LoginForm closeModal={closeModal} />;
+				break;
+			case AuthType.Registration:
+				modalDialogue = registrationDialogue;
+				modalTitle = "Register";
+				modalFormElement = <RegistrationForm closeModal={closeModal} />;
+				break;
+		}
+	};
+
+	getAuthModalValues();
 
 	return (
-		<Dialog
-			open={open}
+		<Modal
+			open={openModal}
 			onClose={() => closeModal()}
 		>
-			<DialogTitle>{isLoginForm ? "Login" : "Register"}</DialogTitle>
-			<DialogContent>
-				<DialogContentText>{isLoginForm ? "Please enter your email and password to login." : "Please fill in your details to create an account."}</DialogContentText>
-				{authType === "login" ? (
-					<LoginForm closeModal={closeModal} /> // Use LoginForm component
-				) : (
-					<RegistrationForm closeModal={closeModal} /> // Use RegistrationForm component
-				)}
-			</DialogContent>
-			<DialogActions>
-				<Button onClick={() => closeModal()}>Cancel</Button>
-			</DialogActions>
-		</Dialog>
+			<Dialog
+				open={openModal}
+				onClose={() => closeModal()}
+			>
+				<DialogTitle>{modalTitle}</DialogTitle>
+				<DialogContent>
+					<DialogContentText>{modalDialogue}</DialogContentText>
+					{modalFormElement}
+				</DialogContent>
+				<DialogActions>
+					<Button onClick={() => closeModal()}>Cancel</Button>
+				</DialogActions>
+			</Dialog>
+		</Modal>
 	);
 };
 

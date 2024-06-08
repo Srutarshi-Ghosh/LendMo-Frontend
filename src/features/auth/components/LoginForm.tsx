@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Button, TextField } from "@mui/material";
 import validateLoginForm from "../utils/ValidateLoginForm";
-import { LoginFormType } from "../constants/Types";
+import { LoginFormType } from "../constants/FormConstants";
 
 interface LoginModalProps {
 	closeModal: Function;
