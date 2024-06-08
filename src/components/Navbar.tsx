@@ -1,80 +1,66 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import styles from '../styles/Navbar.module.css';
-import AuthModal from '../features/auth/components/AuthModal'; // Import AuthModal
-import { Modal } from '@mui/material';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import AuthModal from "../features/auth/components/AuthModal";
+import { AppBar, Box, Button, IconButton, Modal, Toolbar, Typography } from "@mui/material";
 
-interface AuthModalProps {
-	open: boolean;
-	onClose: () => void;
-	onSubmit: (data: any) => void; // Simplified data type for now
-}
-
-const Navbar: React.FC = () => {
+const Navbar = () => {
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-	const [authType, setAuthType] = useState<'login' | 'register'>('login'); // Default to login
+	const [authType, setAuthType] = useState<string>("");
 
 	const handleLoginModalOpen = () => {
 		setIsModalOpen(true);
-		setAuthType('login');
+		setAuthType("login");
 	};
 
 	const handleRegistrationModalOpen = () => {
 		setIsModalOpen(true);
-		setAuthType('register');
+		setAuthType("register");
 	};
 
-	const handleModalClose = () => setIsModalOpen(false);
-
-	const handleAuthSubmit = (data: any) => {
-		// Implement logic to handle login/registration data (optional)
-		console.log('Auth data submitted:', data);
-		setIsModalOpen(false);
-	};
+	const closeModal = () => setIsModalOpen(false);
 
 	return (
 		<>
-			<div className={styles.navbar}>
-				<div className={styles.navContainer}>
-					<div className={styles.leftNavSection}>
-						<div className={styles.navLogo}>
-							<Link
-								to='/'
-								aria-label='HomePage'
-							>
-								{/* Your logo here */}
-							</Link>
-						</div>
-					</div>
-					<div className={styles.rightNavSection}>
-						<li className={styles.navItem}>
-							<button
-								className={styles.navLink}
-								onClick={handleLoginModalOpen}
-							>
-								Login
-							</button>
-						</li>
-						<li className={styles.navItem}>
-							<button
-								className={styles.navLink}
-								onClick={handleRegistrationModalOpen}
-							>
-								Register
-							</button>
-						</li>
-					</div>
-				</div>
-			</div>
+			<AppBar position="static">
+				<Toolbar>
+					<IconButton
+						edge="start"
+						color="inherit"
+						aria-label="menu"
+						sx={{ mr: 2 }}
+					></IconButton>
+					<Typography
+						variant="h6"
+						component={Link}
+						to="/"
+						sx={{ flexGrow: 1, textDecoration: "none", color: "inherit" }}
+					>
+						Your Logo
+					</Typography>
+					<Box sx={{ display: "flex" }}>
+						<Button
+							color="inherit"
+							onClick={handleLoginModalOpen}
+						>
+							Login
+						</Button>
+						<Button
+							color="inherit"
+							onClick={handleRegistrationModalOpen}
+						>
+							Register
+						</Button>
+					</Box>
+				</Toolbar>
+			</AppBar>
 			<Modal
 				open={isModalOpen}
-				onClose={handleModalClose}
+				onClose={closeModal}
 			>
 				<AuthModal
 					open={isModalOpen}
-					onClose={handleModalClose}
-					onSubmit={handleAuthSubmit}
-					authType={authType} // Pass authType to AuthModal
+					closeModal={closeModal}
+					authType={authType}
 				/>
 			</Modal>
 		</>

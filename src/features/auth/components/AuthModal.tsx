@@ -1,46 +1,33 @@
-import * as React from 'react';
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material';
-import LoginForm from './LoginForm'; // Import LoginForm
-import RegistrationForm from './RegistrationForm'; // Import RegistrationForm
-
-interface AuthFormData {
-	email?: string;
-	password?: string;
-	firstName?: string;
-	lastName?: string;
-	confirmPassword?: string;
+import * as React from "react";
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
+import LoginForm from "./LoginForm";
+import RegistrationForm from "./RegistrationForm";
+interface AuthModalProps {
+	open: boolean;
+	closeModal: Function;
+	authType?: string;
 }
 
-type AuthFormType = 'login' | 'register';
-
-const AuthModal: React.FC<{
-	open: boolean;
-	onClose: () => void;
-	onSubmit: (data: AuthFormData) => void;
-	authType?: AuthFormType; // Optional prop to specify login or registration
-}> = ({ open, onClose, onSubmit, authType = 'login' }) => {
-	const isLoginForm = authType === 'login';
+const AuthModal = (authModalProps: AuthModalProps) => {
+	const { open, closeModal, authType } = authModalProps;
+	const isLoginForm = authType === "login";
 
 	return (
 		<Dialog
 			open={open}
-			onClose={onClose}
+			onClose={() => closeModal()}
 		>
-			<DialogTitle>{isLoginForm ? 'Login' : 'Register'}</DialogTitle>
+			<DialogTitle>{isLoginForm ? "Login" : "Register"}</DialogTitle>
 			<DialogContent>
-				<DialogContentText>
-					{isLoginForm
-						? 'Please enter your email and password to login.'
-						: 'Please fill in your details to create an account.'}
-				</DialogContentText>
-				{isLoginForm ? (
-					<LoginForm onSubmit={onSubmit} /> // Use LoginForm component
+				<DialogContentText>{isLoginForm ? "Please enter your email and password to login." : "Please fill in your details to create an account."}</DialogContentText>
+				{authType === "login" ? (
+					<LoginForm closeModal={closeModal} /> // Use LoginForm component
 				) : (
-					<RegistrationForm onSubmit={onSubmit} /> // Use RegistrationForm component
+					<RegistrationForm closeModal={closeModal} /> // Use RegistrationForm component
 				)}
 			</DialogContent>
 			<DialogActions>
-				<Button onClick={onClose}>Cancel</Button>
+				<Button onClick={() => closeModal()}>Cancel</Button>
 			</DialogActions>
 		</Dialog>
 	);
