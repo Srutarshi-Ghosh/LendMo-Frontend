@@ -1,22 +1,8 @@
-import React, { useState } from "react";
+import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import AuthModal from "../features/auth/components/AuthModal";
-import { AppBar, Box, Button, IconButton, Toolbar, Typography } from "@mui/material";
-import { AuthType } from "../features/auth/constants/AuthConstants";
+import AuthContainer from "../features/auth/components/AuthContainer";
 
 const Navbar = () => {
-	const [authType, setAuthType] = useState<AuthType>(AuthType.None);
-
-	const handleLoginModalOpen = () => {
-		setAuthType(AuthType.Login);
-	};
-
-	const handleRegistrationModalOpen = () => {
-		setAuthType(AuthType.Registration);
-	};
-
-	const closeModal = () => setAuthType(AuthType.None);
-
 	return (
 		<>
 			<AppBar position="static">
@@ -35,27 +21,10 @@ const Navbar = () => {
 					>
 						Your Logo
 					</Typography>
-					<Box sx={{ display: "flex" }}>
-						<Button
-							color="inherit"
-							onClick={handleLoginModalOpen}
-						>
-							Login
-						</Button>
-						<Button
-							color="inherit"
-							onClick={handleRegistrationModalOpen}
-						>
-							Register
-						</Button>
-					</Box>
+
+					<AuthContainer />
 				</Toolbar>
 			</AppBar>
-
-			<AuthModal
-				closeModal={closeModal}
-				authType={authType}
-			/>
 		</>
 	);
 };
